@@ -1,0 +1,24 @@
+{
+  "name": "otter-api",
+  "version": "1.0.0",
+  "description": "The Otter API (with some Otters and some CRUD)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Julien-Brcht-Rndlt/otter-API.git"
+  },
+  "keywords": [
+    "otter",
+    "API",
+    "CRUD"
+  ],
+  "author": "Julien Nicolas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Julien-Brcht-Rndlt/otter-API/issues"
+  },
+  "homepage": "https://github.com/Julien-Brcht-Rndlt/otter-API#readme"
+}
