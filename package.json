@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Julien-Brcht-Rndlt/otter-API/issues"
   },
-  "homepage": "https://github.com/Julien-Brcht-Rndlt/otter-API#readme"
+  "homepage": "https://github.com/Julien-Brcht-Rndlt/otter-API#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
