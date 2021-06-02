@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/Julien-Brcht-Rndlt/otter-API#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5"
   }
 }

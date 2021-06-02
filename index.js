@@ -9,6 +9,14 @@ app.use(express.json());
 // A new body object containing the parsed data is populated on the request object after the middleware.
 app.use(express.urlencoded({ extended: true }));
 
+const conn = require('./db-config');
+conn.connect((err) => {
+    if(err){
+        console.error(`Error while connecting to database: ${err.message}`,`${err.stack}`);
+    } else {
+        console.log(`Connected to database with threadId: ${conn.threadId}`);
+    }
+});
 
 app.listen(port, (err) => {
     if(err){
