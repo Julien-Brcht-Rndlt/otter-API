@@ -18,4 +18,5 @@ INSERT INTO otter (`name`, `being`, `about`, `weight`, `cubs`, `url`) VALUES
 ('Suzette', 'nosy', null, 14.5, 2, 'https://imgur.com/a/WVyD0oi'),
 ('Jane', 'wetty', null, 19.3, 3, 'https://imgur.com/a/Se5uOLP'),
 ('Henry', 'hungry', null, 29.4, 1, 'https://imgur.com/a/32NJjVE'),
-('George', 'swimming', null, 24.0, 0, 'https://imgur.com/a/YkDZSMg');
+('George', 'swimming', null, 24.0, 0, 'https://imgur.com/a/YkDZSMg'),
+('Oliver', 'secret', null, 16.4, 4, 'https://imgur.com/a/DUq94YI');
