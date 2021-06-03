@@ -19,13 +19,25 @@ conn.connect((err) => {
     }
 });
 
-// Get all otters.. /otters end-point
+// dividing app in several route endpoints
+const homeRouter = express.Router();
+app.use('/', homeRouter);
+
+const ottersRouter = express.Router();
+app.use('/otters', ottersRouter);
+
+// home API endpoint
+homeRouter.get('/', (req, res) => {
+    res.status(200).send('The Otter API (with some Otters and some CRUD)');
+})
+
+// Get all otters.. /otters endpoint
 /* filters available:
     by name starting
     by weight max
     by numbers of cubs min
 */
-app.get('/otters', (req, res) => {
+ottersRouter.get('/', (req, res) => {
 
     //adding authorized params (check against list)
     const authParams = ['name', 'weight', 'cubs'];
@@ -64,7 +76,7 @@ app.get('/otters', (req, res) => {
 });
 
 // Get a specific otter.. /otters end-point
-app.get('/otters/:id', (req, res) => {
+ottersRouter.get('/:id', (req, res) => {
 
     const otterId = req.params.id;
     const sql = 'SELECT * FROM otter WHERE id = ?';
