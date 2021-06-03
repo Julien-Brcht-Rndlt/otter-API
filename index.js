@@ -20,11 +20,32 @@ conn.connect((err) => {
 });
 
 // Get all otters.. /otters end-point
+/* filters available:
+    by name starting
+    by weight max
+    by numbers of cubs min
+*/
 app.get('/otters', (req, res) => {
 
-    const sql = 'SELECT * FROM otter';
+    let sql = 'SELECT * FROM otter';
+    const sqlFilters = [];
 
-    conn.promise().query(sql)
+    if(req.query.name){
+        sql += ' WHERE name LIKE ?';
+        sqlFilters.push(`${req.query.name}%`);
+    }
+
+    if(req.query.weight){
+        sql += req.query.name ? 'AND weight <= ?' : ' WHERE weight <= ?';
+        sqlFilters.push(req.query.weight);
+    }
+
+    if(req.query.cubs){
+        sql += req.query.name || req.query.weight ? 'AND cubs >= ?' : ' WHERE cubs >= ?';
+        sqlFilters.push(req.query.cubs);
+    }
+
+    conn.promise().query(sql, sqlFilters)
         .then(([results]) => res.status(200).json(results))
         .catch((err) => res.status(500).send(`Error server: ${err.message}`));
 });
