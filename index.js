@@ -27,6 +27,19 @@ conn.connect((err) => {
 */
 app.get('/otters', (req, res) => {
 
+    //adding authorized params (check against list)
+    const authParams = ['name', 'weight', 'cubs'];
+
+    if(req.query){
+        const querystringParams = Object.keys(req.query);
+        const allAuth = querystringParams.every((param) => authParams.includes(param));
+
+        if(!allAuth){
+            res.status(400).send('You asked too much about Otters! (Error 400 - Bad Request!)');
+            return;
+        }
+    }
+
     let sql = 'SELECT * FROM otter';
     const sqlFilters = [];
 
