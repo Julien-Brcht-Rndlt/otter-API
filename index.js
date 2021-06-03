@@ -9,8 +9,8 @@ const port = process.env.PORT || 8083;
 const morgan = require('morgan');
 app.use(morgan('dev'));
 
-const cors = require('cors');
-app.use(cors); // open the API on localhost / avoid cross origins restrictions that secures locally an API.
+//const cors = require('cors');
+//app.use(cors); // open the API on localhost / avoid cross origins restrictions that secures locally an API.
 
 app.use(express.json());
 // setup request url parsing ({ extended: true } precises that the req.body object will contain values of any type instead of just strings).
