@@ -144,6 +144,26 @@ ottersRouter.patch('/:id', (req, res) => {
             });
 });
 
+ottersRouter.delete('/:id', (req, res) => {
+
+    const sql = 'DELETE FROM otter WHERE id = ?';
+
+    const otterId = req.params.id;
+
+    conn.promise().query(sql, otterId)
+            .then(([result]) => {
+               if(result.affectedRows){
+                   res.sendStatus(204);
+               } else {
+                res.status(404).send(`Couldn't delete otter #${otterId} resource, this resource doesn't exist!`);
+               }
+            })
+            .catch((err) => {
+                res.status(500).send(`Error server: ${err.message}`);
+            });
+
+});
+
 
 app.listen(port, (err) => {
     if(err){
