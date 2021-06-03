@@ -2,7 +2,8 @@ const express = require('express');
 
 const app = express();
 
-const port = 8083;
+require('dotenv').config();
+const port = process.env.PORT || 8083;
 
 app.use(express.json());
 // setup request url parsing ({ extended: true } precises that the req.body object will contain values of any type instead of just strings).
@@ -16,6 +17,16 @@ conn.connect((err) => {
     } else {
         console.log(`Connected to database with threadId: ${conn.threadId}`);
     }
+});
+
+// Get all otters.. /otters end-point
+app.get('/otters', (req, res) => {
+
+    const sql = 'SELECT * FROM otter';
+
+    conn.promise().query(sql)
+        .then(([results]) => res.status(200).json(results))
+        .catch((err) => res.status(500).send(`Error server: ${err.message}`));
 });
 
 app.listen(port, (err) => {
