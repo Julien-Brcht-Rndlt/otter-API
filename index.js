@@ -5,6 +5,10 @@ const app = express();
 require('dotenv').config();
 const port = process.env.PORT || 8083;
 
+// HTTP requests / errors logger
+const morgan = require('morgan');
+app.use(morgan('dev'));
+
 app.use(express.json());
 // setup request url parsing ({ extended: true } precises that the req.body object will contain values of any type instead of just strings).
 // A new body object containing the parsed data is populated on the request object after the middleware.
