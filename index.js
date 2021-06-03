@@ -90,11 +90,27 @@ ottersRouter.get('/:id', (req, res) => {
         })
         .catch((err) => {
             if(err === 'NOT_FOUND_RESOURCES'){
-                res.status(404).send(`Resource otter #${otterId} was not found!`)
+                res.status(404).send(`Resource otter #${otterId} was not found!`);
             } else {
-                res.status(500).send(`Error server: ${err.message}`)
+                res.status(500).send(`Error server: ${err.message}`);
             }
         });
+});
+
+ottersRouter.post('/', (req, res) => {
+    const { name, being, about, weight, cubs, url } = req.body;
+
+    const sql = 'INSERT INTO otter (name, being, about, weight, cubs, url) VALUES (?, ?, ?, ?, ?, ?)';
+
+    conn.promise().query('sql', [name, being, about, weight, cubs, url])
+                .then(([result]) => {
+                    console.log(result)
+                    const otterId = result.insertId;
+                    res.status(201).json({ otterId, name, being, about, weight, cubs, url });
+                })
+                .catch((err) => {
+                    res.status(500).send(`Error server: ${err.message}`);
+                });
 });
 
 
