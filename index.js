@@ -29,6 +29,29 @@ app.get('/otters', (req, res) => {
         .catch((err) => res.status(500).send(`Error server: ${err.message}`));
 });
 
+// Get a specific otter.. /otters end-point
+app.get('/otters/:id', (req, res) => {
+
+    const otterId = req.params.id;
+    const sql = 'SELECT * FROM otter WHERE id = ?';
+
+    conn.promise().query(sql, otterId)
+        .then(([results]) => {
+            if(!results || !results.length) {
+                return Promise.reject('NOT_FOUND_RESOURCES');
+            }
+            res.status(200).json(results)
+        })
+        .catch((err) => {
+            if(err === 'NOT_FOUND_RESOURCES'){
+                res.status(404).send(`Resource otter #${otterId} was not found!`)
+            } else {
+                res.status(500).send(`Error server: ${err.message}`)
+            }
+        });
+});
+
+
 app.listen(port, (err) => {
     if(err){
         console.error(`Error while launching the server ${err.message}`);
